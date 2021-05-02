@@ -1,62 +1,33 @@
 <template>
   <div class="bg-white px-4 py-3 flex items-center justify-between sm:px-6">
-    <div class="flex-1 flex justify-between sm:hidden">
-      <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:text-gray-500">
-        Anterior
-      </a>
-      <a href="#" class="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:text-gray-500">
-        Próximo
-      </a>
-    </div>
-    <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+    <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between">
       <div>
         <p class="text-sm text-gray-700">
           Exibindo
           {{ ' ' }}
-          <span class="font-medium">1</span>
+          <span class="font-medium">{{ from }}</span>
           {{ ' ' }}
           até
           {{ ' ' }}
-          <span class="font-medium">10</span>
+          <span class="font-medium">{{ to }}</span>
           {{ ' ' }}
           de
           {{ ' ' }}
-          <span class="font-medium">97</span>
+          <span class="font-medium">{{ total }}</span>
           {{ ' ' }}
           resultados
         </p>
       </div>
       <div>
         <nav class="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
-          <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-            <span class="sr-only">Anterior</span>
-            <ChevronLeftIcon class="h-5 w-5" aria-hidden="true" />
-          </a>
-          <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
-            1
-          </a>
-          <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
-            2
-          </a>
-          <a href="#" class="hidden md:inline-flex relative items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
-            3
-          </a>
-          <span class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700">
-            ...
-          </span>
-          <a href="#" class="hidden md:inline-flex relative items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
-            8
-          </a>
-          <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
-            9
-          </a>
-          <a href="#" class="relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50">
-            10
-          </a>
-          <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
-            <span class="sr-only">Próximo</span>
-            <ChevronRightIcon class="h-5 w-5" aria-hidden="true" />
-          </a>
+            <inertia-link :href="previous" :class="{'pointer-events-none': (previous == null)}" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                <span class="sr-only">Anterior</span>
+                <ChevronLeftIcon class="h-5 w-5" aria-hidden="true" />
+            </inertia-link>
+            <inertia-link :href="next??'#'" :class="{'pointer-events-none': (next == null)}" class="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50">
+                <span class="sr-only">Próximo</span>
+                <ChevronRightIcon class="h-5 w-5" aria-hidden="true" />
+            </inertia-link>
         </nav>
       </div>
     </div>
@@ -67,9 +38,16 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/vue/solid'
 
 export default {
-  components: {
-    ChevronLeftIcon,
-    ChevronRightIcon,
-  },
+    props: {
+        from: Number,
+        to: Number,
+        total: Number,
+        previous: null,
+        next: null,
+    },
+    components: {
+        ChevronLeftIcon,
+        ChevronRightIcon,
+    },
 }
 </script>

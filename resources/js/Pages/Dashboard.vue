@@ -34,6 +34,10 @@
                         <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
                             <div class="py-2 pt-5 align-middle inline-block min-w-full sm:px-6 lg:px-8">
                                 <div class="overflow-hidden border-b border-l border-r border-gray-200 sm:rounded-lg">
+                                    <div v-if="show_message" class="p-3 bg-green-500 rounded text-white text-sm flex justify-between items-center">
+                                        <span class="w-full">Estudante removido com sucesso!</span>
+                                        <span class="w-6 font-bold cursor-pointer px-2" @click="show_message = false">-</span>
+                                    </div>
                                     <table class="min-w-full divide-y divide-gray-200">
                                         <thead class="bg-gray-50">
                                             <tr class="divide-x divide-gray-200">
@@ -55,26 +59,26 @@
                                             </tr>
                                         </thead>
                                         <tbody class="bg-white divide-y divide-gray-200">
-                                            <tr v-for="convite in ['Normal', 'VIP', 'Tipo desconhecido']" class="divide-x divide-gray-200" :key="convite">
+                                            <tr v-for="estudante in estudantes.data" class="divide-x divide-gray-200" :key="estudante.id">
                                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                                    {{ convite }}
+                                                    {{ estudante.nome }}
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-xs text-gray-900">
-                                                    19.000,00 KZ
+                                                    {{ estudante.serie_ingresso }}º ano
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap">
-                                                    <div class="text-xs text-gray-900">0 / 100</div>
+                                                    <div class="text-xs text-gray-900">{{ estudante.data_nascimento }}</div>
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap text-xs text-gray-500">
-                                                    Encerrado
+                                                    {{ estudante.encarregado.nome }}
                                                 </td>
                                                 <td class="px-6 py-4 whitespace-nowrap flex justify-around">
-                                                    <a href="#" class="bg-blue-500 p-2 rounded-full">
+                                                    <inertia-link :href="route('estudante.edit', estudante.id)" class="bg-blue-500 p-2 rounded-full">
                                                         <PencilIcon class="text-white sm:text-sm h-5 w-5" aria-hidden="true" />
-                                                    </a>
-                                                    <a href="#" class="bg-red-500 p-2 rounded-full">
+                                                    </inertia-link>
+                                                    <span @click="onDelete(estudante.id)" class="bg-red-500 p-2 rounded-full cursor-pointer">
                                                         <TrashIcon class="text-white sm:text-sm h-5 w-5" aria-hidden="true" />
-                                                    </a>
+                                                    </span>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -82,7 +86,12 @@
                                 </div>
                             </div>
                         </div>
-                        <Pagination />
+                        <Pagination
+                        :from="estudantes.from"
+                        :to="estudantes.to"
+                        :total="estudantes.total"
+                        :previous="estudantes.prev_page_url"
+                        :next="estudantes.next_page_url" />
                     </div>
                 </div>
             </div>
@@ -98,6 +107,9 @@
     import { TrashIcon } from '@heroicons/vue/solid'
 
     export default {
+        props: {
+            estudantes: Object,
+        },
         components: {
             AppLayout,
             Welcome,
@@ -106,5 +118,23 @@
             PencilIcon,
             TrashIcon
         },
+        data () {
+            return {
+                show_message: false,
+            }
+        },
+        methods: {
+            onDelete(id){
+                var dados = this;
+                this.$inertia.delete(route('estudante.destroy', id), this.form, {
+                    onSuccess(){
+                        dados.show_message = true;
+                    },
+                    onError(errors){
+                        dados.show_message = false;
+                    },
+                });
+            }
+        }
     }
 </script>
