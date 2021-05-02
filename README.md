@@ -1,53 +1,33 @@
+## Code-Student - Fansoni Muzanzo
 ## Sobre o Code-Student
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Code-Student é uma aplicação PHP para o cadastramento de estudantes. Nela foi usada ferramentas como Laravel (framework), Vuejs e MySql:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- [Laravel ^8.x](https://laravel.com/docs/8.x/installation).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- [Utilizou-se JetStream ^2.3](https://jetstream.laravel.com/2.x/introduction.html).
 
-## Learning Laravel
+- Fez-se também recurso ao StarterKit do Laravel 8.x o que inclui o Laravel JetStream, propriamente trabalhou-se com o [Inertia](https://inertiajs.com/) + Vuejs.
+ 
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Code-Student é uma aplicação simples e espero que possas aproveitar.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+  
+  
 
-## Laravel Sponsors
+## :cd: Instalação
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Para além dos factores acima ilustrados, está aplicação requer també Vue 3.X.
 
-### Premium Partners
+Para o processo de instalação, deve-se primeiramente fazer uma cópia do arquivo `.env-example` para o `.env` do servidor fazendo então as configurações necessárias como a do banco de dados.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/)**
-- **[OP.GG](https://op.gg)**
+1. Depois de concluido, rode no terminal o comando abaixo para a criação da base de dados
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+```sh
+php artisan migrate
+```
+2. Em seguida o comando abaixo para instalar as dependências necessárias:
+```sh
+npm install
+npm dev
+```
